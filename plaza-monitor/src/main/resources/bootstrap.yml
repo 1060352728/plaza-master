@@ -1,0 +1,26 @@
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health #2.0后actuator的地址发生了变化
+
+    prefer-ip-address: true #使用IP注册
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+
+    metadata-map:    # 注册给eureka的时候告诉eureka自己的密码
+      "user.name": ${spring.security.user.name}         #These two are needed so that the server
+      "user.password": ${spring.security.user.password} #can access the protected client endpoints
+
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://root:eureka@127.0.0.1:8761}/eureka/
+
+# 2.0开始，actuator默认不开放，所以要设置为开放
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

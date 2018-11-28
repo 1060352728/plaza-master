@@ -1,0 +1,24 @@
+server:
+  port: 8022
+
+spring:
+  application:
+    name: @pom.artifactId@
+  profiles:
+    active:
+      - secure
+
+---
+spring:
+  profiles: insecure
+---
+# admin登录的用户名和密码
+spring:
+  profiles: secure
+  security:
+    user:
+      name: "root"
+      password: "monitor"
+
+
+

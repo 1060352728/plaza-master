@@ -1,0 +1,47 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://root:eureka@127.0.0.1:8761}/eureka/
+  instance:
+    prefer-ip-address: true #使用IP注册
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+#开启配置服务发现
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: PLAZA-DISCOVERY  #配置服务实例名称
+      label: master  #配置文件所在分支
+      profile: dev
+    bus:
+      refresh:
+        enabled: true
+      id: ${vcap.application.name:${spring.application.name:application}}:${vcap.application.instance_index:${spring.profiles.active:${local.server.port:${server.port:0}}}}:${vcap.application.instance_id:${random.value}}
+
+#防止访问超时报错
+hystrix:
+  command:
+    default:  #默认超时时间设置
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000   #默认超时时间3秒
+
+fegin:
+  hystrix:
+    enabled: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug

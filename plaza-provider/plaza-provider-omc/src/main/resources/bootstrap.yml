@@ -1,0 +1,64 @@
+eureka:
+  client:
+    serviceUrl:  #向注册中心注册自己
+      defaultZone: ${EUREKA_SERVICE_URL:http://root:eureka@127.0.0.1:8761}/eureka/
+  instance:
+    prefer-ip-address: true #使用IP注册
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+
+spring:
+  cloud:
+    config:   #开启配置服务发现
+      discovery:
+        enabled: true
+        service-id: PLAZA-DISCOVERY  #配置服务实例名称
+      label: master  #配置文件所在分支
+      profile: dev
+    bus:
+      refresh:
+        enabled: true   #动态使用webhook刷新配置问价，2.0以上的版本一定要加bus.id
+      id: ${vcap.application.name:${spring.application.name:application}}:${vcap.application.instance_index:${spring.profiles.active:${local.server.port:${server.port:0}}}}:${vcap.application.instance_id:${random.value}}
+  zipkin:  #链路追踪
+    base-url: http://192.168.99.100:9411/  #链路追踪地址
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1   #开发环境将所有的请求都发送至链路追踪，默认10%
+
+hystrix:  #防止访问超时报错
+  command:
+    default:  #默认超时时间设置
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000   #默认超时时间3秒
+    findByOrderId:  #指定方法的超时时间
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000   #超时时间2秒
+
+
+feign:
+  hystrix:
+    enabled: true  #fegin开启hystrix 服务降级
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #暴露所有的接口，主要用来动态刷新配置
+  endpoint:
+    health:
+      show-details: ALWAYS
+  server:
+    servlet:
+      context-path: /
+
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
+
+
+

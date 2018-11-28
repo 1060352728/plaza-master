@@ -1,0 +1,44 @@
+server:
+  port: 8088
+spring:
+  profiles:
+    active: dev
+  application:
+    name: @pom.artifactId@
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+security:
+  oauth2:
+    resource:
+      id: plaza-provider-uac
+      user-info-uri:  http://127.0.0.1:8099/user
+      prefer-token-info: false
+    client:
+      access-token-uri: http://127.0.0.1:8088/uaa/oauth/token ##网关的地址
+      user-authorization-uri: http://127.0.0.1:8088/uaa/oauth/authorize
+
+##############end#####################
+
+####超时配置####
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  eureka:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+###超时配置###

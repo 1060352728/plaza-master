@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.ronglian.plaza</groupId>
+	<artifactId>plaza-oauth</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+
+	<name>plaza-oauth</name>
+	<description>springcloud项目实战权限控制中心</description>
+
+	<parent>
+		<groupId>com.ronglian.plaza</groupId>
+		<artifactId>plaza-master</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<dependencies>
+        <!-- hystrix断路器 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.3.4.RELEASE</version>  <!-- 解決redis保存token報錯 -->
+        </dependency>
+        <dependency>
+			<groupId>com.ronglian.plaza</groupId>
+			<artifactId>plaza-provider-uac-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+	</dependencies>
+</project>

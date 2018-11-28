@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: @pom.artifactId@
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations:
+    - classpath*:mapping/**/*.xml
+
+#txmanager地址
+tm:
+  manager:
+    url: http://127.0.0.1:7000/tx/manager/

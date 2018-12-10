@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 清除和获取token
+ * 清除token
  */
 @FrameworkEndpoint
 public class RevokeTokenEndpoint {

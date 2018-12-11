@@ -135,11 +135,11 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public List<OrderDTO> list() {
-        try {
+        /*try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
 
-        }
+        }*/
         //1:获取所有的order
         List<OrderMaster> orderMasterList = orderMasterMapper.list();
         //2:获取所有的orderid组成集合

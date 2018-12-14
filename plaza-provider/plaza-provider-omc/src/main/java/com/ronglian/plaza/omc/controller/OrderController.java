@@ -101,16 +101,16 @@ public class OrderController {
                 @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds",value = "10000"),  //断路器处于半开放状态，会在10秒内进行重试
                 @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "60"),  //错误率达到60%以上会启动熔断机制
     })
-    @GetMapping("/findbyid/{orderId}")
-    public ResultVO<OrderDTO> findByOrderId(@PathVariable Integer orderId){
-        if(orderId==1){
+    @GetMapping("/findbyid")
+    public ResultVO<OrderDTO> findByOrderId(@RequestParam("orderId")String orderId){
+        /*if(orderId==1){
             try {
                 Thread.sleep(2000);
             } catch (Exception e) {
 
             }
-        }
-        return ResultVOUtil.success(orderService.findByOrderId("1541123833834409370"));
+        }*/
+        return ResultVOUtil.success(orderService.findByOrderId(orderId));
     }
 
 
@@ -129,7 +129,7 @@ public class OrderController {
      * 注意，原方法上有参数，服务降级参数也必须有（坑）
      * @return
      */
-    public ResultVO<OrderDTO> findByIdfallBack(Integer orderId){
+    public ResultVO<OrderDTO> findByIdfallBack(String orderId){
         log.info("访问/findbyid参数orderId{}"+orderId+"时接口服务出现容错，该系统已启动服务的保护机制");
         return ResultVOUtil.error(403,"根据订单编号查询订单信息由于网络问题导致失败，请重试");
     }

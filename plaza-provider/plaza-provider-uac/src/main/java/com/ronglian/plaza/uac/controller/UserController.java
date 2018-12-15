@@ -7,10 +7,7 @@ import com.ronglian.plaza.uac.service.MenuInfoService;
 import com.ronglian.plaza.uac.service.RoleService;
 import com.ronglian.plaza.uac.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
@@ -48,6 +45,12 @@ public class UserController {
     public List<MenuInfo> findMenus(@PathVariable("roleId") String roleId){
         List<MenuInfo> menuInfoList = menuInfoService.findMenus(Integer.parseInt(roleId));
         return menuInfoList;
+    }
+
+    @PostMapping("/findbyusername")
+    public UserInfo findByUser(@RequestParam("username") String username){
+        UserInfo userInfo = userService.findByUsername(username);
+        return userInfo;
     }
 
 }

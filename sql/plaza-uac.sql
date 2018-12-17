@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-11-21 17:24:36
+Date: 2018-12-17 13:26:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `menu_info` (
   `menu_url` varchar(255) DEFAULT NULL,
   `menu_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu_info
@@ -35,6 +35,7 @@ INSERT INTO `menu_info` VALUES ('2', '创建订单', '/api-omc/order/creat', '/a
 INSERT INTO `menu_info` VALUES ('3', '订单列表', '/api-omc/order/list', '/api-omc/order/list');
 INSERT INTO `menu_info` VALUES ('4', '查询订单', '/api-omc/order/findbyid', '/api-omc/order/findbyid');
 INSERT INTO `menu_info` VALUES ('5', '查询产品', '/api-psc/product/list', '/api-psc/product/list');
+INSERT INTO `menu_info` VALUES ('6', '用户查询', '/api-uac/user/findbyusername', '/api-uac/user/findbyusername');
 
 -- ----------------------------
 -- Table structure for role_info
@@ -70,10 +71,13 @@ CREATE TABLE `role_menu` (
 INSERT INTO `role_menu` VALUES ('1', '1', '1');
 INSERT INTO `role_menu` VALUES ('2', '1', '3');
 INSERT INTO `role_menu` VALUES ('3', '1', '4');
-INSERT INTO `role_menu` VALUES ('4', '2', '2');
-INSERT INTO `role_menu` VALUES ('5', '2', '4');
-INSERT INTO `role_menu` VALUES ('6', '1', '5');
-INSERT INTO `role_menu` VALUES ('7', '2', '5');
+INSERT INTO `role_menu` VALUES ('4', '1', '5');
+INSERT INTO `role_menu` VALUES ('5', '1', '6');
+INSERT INTO `role_menu` VALUES ('6', '2', '2');
+INSERT INTO `role_menu` VALUES ('7', '2', '3');
+INSERT INTO `role_menu` VALUES ('8', '2', '4');
+INSERT INTO `role_menu` VALUES ('9', '2', '5');
+INSERT INTO `role_menu` VALUES ('10', '2', '6');
 
 -- ----------------------------
 -- Table structure for user_info

@@ -5,9 +5,12 @@ import com.ronglian.plaza.util.resultvo.ResultLogoutVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpoint;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 /**
  * 清除token
@@ -19,7 +22,8 @@ public class RevokeTokenEndpoint {
     private ConsumerTokenServices consumerTokenServices;
 
     @RequestMapping(value = "/oauth/token", method= RequestMethod.DELETE)
-    public @ResponseBody ResultLogoutVO revokeToken(String access_token){
+    public @ResponseBody ResultLogoutVO revokeToken(@RequestBody Map<String,String> map){
+        String access_token = map.get("access_token");
         ResultLogoutVO resultLogoutVO = new ResultLogoutVO();
         if (consumerTokenServices.revokeToken(access_token)){
             resultLogoutVO.setCode(LogoutResultEnum.LOGOUT_SUCCESS.getCode());

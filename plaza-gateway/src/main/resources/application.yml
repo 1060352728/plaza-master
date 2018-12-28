@@ -12,9 +12,6 @@ management:
       exposure:
         include: "*"
 
-zuul:
-  sensitive-headers: Authorization
-
 security:
   oauth2:
     resource:

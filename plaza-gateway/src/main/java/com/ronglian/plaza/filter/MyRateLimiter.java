@@ -34,7 +34,7 @@ public class MyRateLimiter extends ZuulFilter {
      */
     @Override
     public int filterOrder() {
-        return SERVLET_DETECTION_FILTER_ORDER - 1;
+        return SERVLET_DETECTION_FILTER_ORDER - 2;
     }
 
     @Override
@@ -47,10 +47,10 @@ public class MyRateLimiter extends ZuulFilter {
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
         //没有获取到令牌
-        /*if(!RATE_LIMITER.tryAcquire()){
+        if(!RATE_LIMITER.tryAcquire()){
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(HttpStatus.GATEWAY_TIMEOUT.value());//超时，请稍后访问504
-        }*/
+        }
         return null;
     }
 }
